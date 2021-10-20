@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "95852336112",
+    "project_id": "humanechat",
+    "storage_bucket": "humanechat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95852336112:android:a0ed76391acb1955fe8335",
+        "android_client_info": {
+          "package_name": "com.example.humane_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95852336112-a2ojphpbjoh4ejpavm3rk8j686djgqmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrAt3sRRYb0oqy9ta46eibA-8OGZumorE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95852336112-a2ojphpbjoh4ejpavm3rk8j686djgqmj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
