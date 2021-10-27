@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:humane_chat/modal/user.dart' as FirebaseUser;
+import 'package:humane_chat/model/user.dart' as FirebaseUser;
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
