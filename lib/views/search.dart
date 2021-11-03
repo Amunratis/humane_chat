@@ -26,13 +26,14 @@ class _SearchScreenState extends State<SearchScreen> {
         .getUserByUsername(searchTextEditingController.text)
         .then((val) {
       setState(() {
-        searchSnapshot = val;
+        searchSnapshot = val as QuerySnapshot<Object?>?;
       });
     });
   }
 
   createChatRoomAndStartConversation({required String userName}) {
-    String chatRoomId = generateChatRoomId(userName, Constants.myName);
+    String chatRoomId =
+        generateChatRoomId(userName, Constants.myName) as String;
 
     List<String> users = [userName, Constants.myName];
     Map<String, dynamic> chatRoomMap = {
@@ -42,7 +43,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
     DatabaseMethods().createChatRoom(chatRoomId, chatRoomMap);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ConversationScreen()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => ConversationScreen(chatRoomId)));
   }
 
   Widget searchTile({required String userName, String? userEmail}) {
@@ -104,8 +107,8 @@ class _SearchScreenState extends State<SearchScreen> {
             itemCount: searchSnapshot!.docs.length,
             itemBuilder: (context, index) {
               return searchTile(
-                userName: searchSnapshot!.docs[index].get("name"),
-                userEmail: searchSnapshot!.docs[index].get("email"),
+                userName: searchSnapshot!.docs[index].get("name") as String,
+                userEmail: searchSnapshot!.docs[index].get("email") as String,
               );
             })
         : Container();
@@ -113,7 +116,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    debugDumpRenderTree();
     return Scaffold(
       appBar: AppBarMain(context: context),
       body: Container(
