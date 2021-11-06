@@ -42,8 +42,7 @@ class _MyAppState extends State<MyApp> {
           scaffoldBackgroundColor: Color(0xff1F1F1F),
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: Authenticate()
-      /*userIsLoggedin != null ? ChatRoom() : Authenticate()*/,
+      home: /*userIsLoggedin != null ? ChatRoom() : */ Authenticate(),
     );
   }
 }

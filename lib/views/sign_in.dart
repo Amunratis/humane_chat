@@ -1,3 +1,4 @@
+import 'package:animated_button/animated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final formKey = GlobalKey<FormState>();
   TextEditingController emailTextEditingController =
       new TextEditingController();
   TextEditingController passwordTextEditingController =
@@ -25,8 +25,9 @@ class _SignInState extends State<SignIn> {
   bool isLoading = false;
   AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = new DatabaseMethods();
-
   late QuerySnapshot snapshotUserInfo;
+
+  final formKey = GlobalKey<FormState>();
 
   signIn() {
     if (formKey.currentState!.validate()) {
@@ -68,27 +69,34 @@ class _SignInState extends State<SignIn> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 24),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-              TextFormField(
-                  key: formKey,
-                  validator: (val) {
-                    return val!.isEmpty || val.length < 4
-                        ? "Please provide UserNAme"
-                        : null;
-                  },
-                  controller: emailTextEditingController,
-                  style: myTextStyle(),
-                  decoration: textFieldInputDecoration("username")),
-              TextFormField(
-                validator: (val) {
-                  return RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(val!)
-                      ? null
-                      : "Enter correct email";
-                },
-                controller: passwordTextEditingController,
-                style: myTextStyle(),
-                decoration: textFieldInputDecoration("email"),
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                        validator: (val) {
+                          return RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(val!)
+                              ? null
+                              : "Enter correct email";
+                        },
+                        controller: emailTextEditingController,
+                        style: myTextStyle(),
+                        decoration: textFieldInputDecoration("email")),
+                    TextFormField(
+                      obscureText: true,
+                      validator: (val) {
+                        return val!.length > 6
+                            ? null
+                            : "Please provide password 6+ characters";
+                      },
+                      controller: passwordTextEditingController,
+                      style: myTextStyle(),
+                      decoration: textFieldInputDecoration("password"),
+                    )
+                  ],
+                ),
               ),
               SizedBox(
                 height: 8,
@@ -101,33 +109,42 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               SizedBox(height: 8),
-              GestureDetector(
-                onTap: () {
+              AnimatedButton(
+                width: MediaQuery.of(context).size.width - 70,
+                shape: BoxShape.rectangle,
+                child: Text(
+                  'Sign in',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                color: Colors.blue,
+                onPressed: () {
                   signIn();
                 },
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        const Color(0xff007EF4),
-                        const Color(0xff2A75BC)
-                      ]),
-                      borderRadius: BorderRadius.circular(30)),
-                  child: Text("Sign in", style: mediumTextStyle()),
-                ),
+                enabled: true,
+                shadowDegree: ShadowDegree.light,
               ),
               SizedBox(height: 16),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white),
-                child: Text("Sign in with Google",
-                    style: TextStyle(color: Colors.black87, fontSize: 17)),
+              AnimatedButton(
+                width: MediaQuery.of(context).size.width - 70,
+                shape: BoxShape.rectangle,
+                child: Text(
+                  'Sign in with Google',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                color: Colors.white,
+                onPressed: () {
+                  //TODO;
+                },
+                enabled: true,
+                shadowDegree: ShadowDegree.light,
               ),
               SizedBox(height: 16),
               Row(

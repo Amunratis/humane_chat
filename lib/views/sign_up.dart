@@ -1,3 +1,4 @@
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:humane_chat/helper/helperfunctions.dart';
@@ -121,34 +122,42 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     SizedBox(height: 8),
-                    GestureDetector(
-                      onTap: () {
+                    AnimatedButton(
+                      width: MediaQuery.of(context).size.width - 70,
+                      shape: BoxShape.rectangle,
+                      child: Text(
+                        'Sign up',
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      color: Colors.blue,
+                      onPressed: () {
                         signMeUp();
                       },
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              const Color(0xff007EF4),
-                              const Color(0xff2A75BC)
-                            ]),
-                            borderRadius: BorderRadius.circular(30)),
-                        child: Text("Sign up", style: mediumTextStyle()),
-                      ),
+                      enabled: true,
+                      shadowDegree: ShadowDegree.light,
                     ),
                     SizedBox(height: 16),
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.white),
-                      child: Text("Sign up with Google",
-                          style:
-                              TextStyle(color: Colors.black87, fontSize: 17)),
+                    AnimatedButton(
+                      width: MediaQuery.of(context).size.width - 70,
+                      shape: BoxShape.rectangle,
+                      child: Text(
+                        'Sign up with Google',
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      color: Colors.white,
+                      onPressed: () {
+                        //TODO;
+                      },
+                      enabled: true,
+                      shadowDegree: ShadowDegree.light,
                     ),
                     SizedBox(height: 16),
                     Row(
